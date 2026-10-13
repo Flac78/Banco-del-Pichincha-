@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Banco del Pichincha</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js para gráficos dinámicos -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-slate-100 font-sans text-slate-800 min-h-screen flex flex-col">
+
+    <!-- HEADER / NAVBAR -->
+    <header class="bg-blue-900 text-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col sm:flex-row justify-between items-center">
+            <div class="flex items-center space-x-3 mb-2 sm:mb-0">
+                <!-- Contenedor del Logo -->
+                <div class="flex-shrink-0">
+                    <img src="img/logo.png" 
+                        alt="Logo de Banco Pichincha" 
+                        class="h-12 w-auto object-contain block">
+                </div>
+                
+                <!-- Contenedor de Textos (Nombre y Subtítulo) -->
+                <div class="flex flex-col justify-center">
+                    <h1 class="text-xl font-bold tracking-wide leading-tight text-white">
+                        Banco Pichincha
+                    </h1>
+                    <p class="text-xs text-blue-200 leading-tight mt-0.5">
+                        Portal SGSI - ISO 27001 & ISO 22301
+                    </p>
+                </div>
+            </div>
+            <!-- Navegación por Pestañas -->
+            <nav class="flex flex-wrap gap-2 text-sm">
+                <button onclick="switchTab('empresa')" id="tab-empresa" class="px-3 py-2 rounded-t-lg bg-blue-600 font-bold text-white transition">1. Empresa</button>
+                <button onclick="switchTab('seguridad')" id="tab-seguridad" class="px-3 py-2 rounded-t-lg bg-blue-800 text-white hover:bg-blue-700 transition">2. Seguridad & Activos</button>
+                <button onclick="switchTab('iso')" id="tab-iso" class="px-3 py-2 rounded-t-lg bg-blue-800 text-white hover:bg-blue-700 transition">3. ISO 27001</button>
+                <button onclick="switchTab('riesgos')" id="tab-riesgos" class="px-3 py-2 rounded-t-lg bg-blue-800 text-white hover:bg-blue-700 transition">4. Gestión de Riesgos</button>
+                <button onclick="switchTab('plan')" id="tab-plan" class="px-3 py-2 rounded-t-lg bg-blue-800 text-white hover:bg-blue-700 transition">5. Plan de Acción</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 py-6 flex-grow w-full">
+
+        <!-- SECCIÓN 1: EMPRESA -->
+        <section id="sec-empresa" class="tab-content block">
+            <div class="bg-white p-6 rounded-xl shadow-md mb-6">
+                <h2 class="text-2xl font-bold text-blue-900 mb-4 flex items-center gap-2">
+                    <i class="fa-solid fa-building"></i> Información General de la Empresa
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                    <div class="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-600">
+                        <span class="text-xs text-slate-500 uppercase font-semibold">Organización</span>
+                        <p class="text-lg font-bold text-slate-800">Banco del Pichincha</p>
+                        <p class="text-sm text-slate-600 mt-1">Servicios financieros (~80 empleados).</p>
+                    </div>
+                    <div class="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-600">
+                        <span class="text-xs text-slate-500 uppercase font-semibold">Actividad Económica</span>
+                        <p class="text-sm text-slate-700 mt-1">Cuentas de ahorro, créditos, depósitos, transferencias y banca en línea.</p>
+                    </div>
+                    <div class="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-600">
+                        <span class="text-xs text-slate-500 uppercase font-semibold">Alcance del SGSI</span>
+                        <p class="text-sm text-slate-700 mt-1">Protección de la infraestructura bancaria, datos de socios e información sensible.</p>
+                    </div>
+                </div>
+
+                <h3 class="text-xl font-bold text-slate-800 mb-3">Procesos y Activos Tecnológicos Principales</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="p-4 border rounded-lg hover:shadow-md transition bg-slate-50">
+                        <i class="fa-solid fa-server text-2xl text-blue-700 mb-2"></i>
+                        <h4 class="font-bold">Core Bancario</h4>
+                        <p class="text-xs text-slate-600">Procesamiento de operaciones financieras en tiempo real.</p>
+                    </div>
+                    <div class="p-4 border rounded-lg hover:shadow-md transition bg-slate-50">
+                        <i class="fa-solid fa-database text-2xl text-blue-700 mb-2"></i>
+                        <h4 class="font-bold">Base de Datos de Clientes</h4>
+                        <p class="text-xs text-slate-600">Información personal, transaccional y financiera.</p>
+                    </div>
+                    <div class="p-4 border rounded-lg hover:shadow-md transition bg-slate-50">
+                        <i class="fa-solid fa-globe text-2xl text-blue-700 mb-2"></i>
+                        <h4 class="font-bold">Banca Web & App</h4>
+                        <p class="text-xs text-slate-600">Canal digital de atención y consultas en línea.</p>
+                    </div>
+                    <div class="p-4 border rounded-lg hover:shadow-md transition bg-slate-50">
+                        <i class="fa-solid fa-envelope text-2xl text-blue-700 mb-2"></i>
+                        <h4 class="font-bold">Correo Corporativo</h4>
+                        <p class="text-xs text-slate-600">Comunicación oficial interna y externa.</p>
+                    </div>
+                    <div class="p-4 border rounded-lg hover:shadow-md transition bg-slate-50">
+                        <i class="fa-solid fa-network-wired text-2xl text-blue-700 mb-2"></i>
+                        <h4 class="font-bold">Red Corporativa & Servidores</h4>
+                        <p class="text-xs text-slate-600">Infraestructura local, respaldos y almacenamiento.</p>
+                    </div>
+                    <div class="p-4 border rounded-lg hover:shadow-md transition bg-slate-50">
+                        <i class="fa-solid fa-users text-2xl text-blue-700 mb-2"></i>
+                        <h4 class="font-bold">Atención a Socios</h4>
+                        <p class="text-xs text-slate-600">Operaciones presenciales en ventanilla y caja.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+<!-- SECCIÓN 2: SEGURIDAD & ACTIVOS -->
+        <section id="sec-seguridad" class="tab-content hidden">
+            <div class="bg-white p-6 rounded-xl shadow-md mb-6">
+                <h2 class="text-2xl font-bold text-blue-900 mb-4 flex items-center gap-2">
+                    <i class="fa-solid fa-lock"></i> Principios de Seguridad (CID) & Clasificación
+                </h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <div class="p-5 border rounded-xl bg-blue-50/50">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="p-3 bg-blue-600 text-white rounded-lg"><i class="fa-solid fa-user-shield"></i></span>
+                            <h3 class="font-bold text-lg text-blue-900">Confidencialidad</h3>
+                        </div>
+                        <p class="text-sm text-slate-600">Acceso exclusivo a la información financiera por parte de personal autorizado.</p>
+                    </div>
+                    <div class="p-5 border rounded-xl bg-emerald-50/50">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="p-3 bg-emerald-600 text-white rounded-lg"><i class="fa-solid fa-file-circle-check"></i></span>
+                            <h3 class="font-bold text-lg text-emerald-900">Integridad</h3>
+                        </div>
+                        <p class="text-sm text-slate-600">Exactitud y totalidad de los datos bancarios evitando alteraciones no autorizadas.</p>
+                    </div>
+                    <div class="p-5 border rounded-xl bg-amber-50/50">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="p-3 bg-amber-600 text-white rounded-lg"><i class="fa-solid fa-clock"></i></span>
+                            <h3 class="font-bold text-lg text-amber-900">Disponibilidad</h3>
+                        </div>
+                        <p class="text-sm text-slate-600">Acceso continuo y garantizado a los servicios del Core bancario e internet.</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-slate-50 p-4 rounded-lg border">
+                        <h4 class="font-bold text-blue-800 mb-2"><i class="fa-solid fa-layer-group"></i> Clasificación de la Información</h4>
+                        <ul class="space-y-2 text-sm">
+                            <li class="p-2 bg-red-100 border-l-4 border-red-600 rounded">
+                                <strong>Confidencial / Crítica:</strong> BD de clientes, credenciales del Core Bancario.
+                            </li>
+                            <li class="p-2 bg-yellow-100 border-l-4 border-yellow-600 rounded">
+                                <strong>Restringida:</strong> Informes financieros internos y correo corporativo.
+                            </li>
+                            <li class="p-2 bg-green-100 border-l-4 border-green-600 rounded">
+                                <strong>Pública:</strong> Tarifarios, requisitos de crédito e información web.
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-lg border">
+                        <h4 class="font-bold text-blue-800 mb-2"><i class="fa-solid fa-shield-halved"></i> Controles Físicos vs. Lógicos</h4>
+                        <div class="grid grid-cols-2 gap-2 text-xs">
+                            <div class="bg-white p-3 rounded shadow-sm">
+                                <span class="font-bold text-indigo-700 block mb-1">Seguridad Física</span>
+                                <ul class="list-disc list-inside space-y-1 text-slate-600">
+                                    <li>Biométricos en Data Center.</li>
+                                    <li>Cámaras CCTV y Extintores FM200.</li>
+                                    <li>UPS y Generador Eléctrico.</li>
+                                </ul>
+                            </div>
+                            <div class="bg-white p-3 rounded shadow-sm">
+                                <span class="font-bold text-teal-700 block mb-1">Seguridad Lógica</span>
+                                <ul class="list-disc list-inside space-y-1 text-slate-600">
+                                    <li>MFA (Autenticación Doble Factor).</li>
+                                    <li>Firewall, Antivirus y Cifrado BD.</li>
+                                    <li>Control de acceso por roles (RBAC).</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+<!-- SECCIÓN 3: ISO 27001 -->
+        <section id="sec-iso" class="tab-content hidden">
+            <div class="bg-white p-6 rounded-xl shadow-md mb-6">
+                <h2 class="text-2xl font-bold text-blue-900 mb-4 flex items-center gap-2">
+                    <i class="fa-solid fa-certificate"></i> Buenas Prácticas & ISO 27001
+                </h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="text-lg font-bold text-slate-800 mb-2">Política de Seguridad Institucional</h3>
+                        <p class="text-sm text-slate-600 leading-relaxed bg-blue-50 p-4 rounded-lg border-l-4 border-blue-700">
+                            "El Banco del Pichincha se compromete a proteger la confidencialidad, integridad y disponibilidad de la información de sus socios, aplicando controles técnicos y normativos basados en ISO 27001 para la mejora continua."
+                        </p>
+                        
+                        <h3 class="text-lg font-bold text-slate-800 mt-4 mb-2">Ciclo PHVA de la Seguridad</h3>
+                        <div class="grid grid-cols-2 gap-2 text-xs">
+                            <div class="p-2 bg-blue-100 rounded"><strong>Planificar:</strong> Políticas y evaluación de riesgos.</div>
+                            <div class="p-2 bg-green-100 rounded"><strong>Hacer:</strong> Implementación de MFA y respaldos.</div>
+                            <div class="p-2 bg-yellow-100 rounded"><strong>Verificar:</strong> Auditorías y monitoreo de incidentes.</div>
+                            <div class="p-2 bg-purple-100 rounded"><strong>Actuar:</strong> Corrección de fallas y planes de acción.</div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-lg font-bold text-slate-800 mb-2">Protocolo de Gestión de Incidentes</h3>
+                        <ol class="relative border-l border-blue-300 ml-3 space-y-3 text-sm">
+                            <li class="mb-2 ml-4">
+                                <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-1.5 border border-white"></div>
+                                <strong class="text-blue-900">1. Detección:</strong> Monitoreo constante y reporte inicial a TI.
+                            </li>
+                            <li class="mb-2 ml-4">
+                                <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-1.5 border border-white"></div>
+                                <strong class="text-blue-900">2. Contención:</strong> Aislamiento de red y bloqueo de cuentas comprometidas.
+                            </li>
+                            <li class="mb-2 ml-4">
+                                <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-1.5 border border-white"></div>
+                                <strong class="text-blue-900">3. Recuperación:</strong> Restauración de datos y servicios desde copias de seguridad.
+                            </li>
+                            <li class="mb-2 ml-4">
+                                <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-1.5 border border-white"></div>
+                                <strong class="text-blue-900">4. Prevención:</strong> Fortalecimiento de controles y capacitación adicional.
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+<!-- SECCIÓN 4: GESTIÓN DE RIESGOS -->
+        <section id="sec-riesgos" class="tab-content hidden">
+            <div class="bg-white p-6 rounded-xl shadow-md mb-6">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
+                    <div>
+                        <h2 class="text-2xl font-bold text-blue-900 flex items-center gap-2">
+                            <i class="fa-solid fa-triangle-exclamation"></i> Evaluación y Matriz de Riesgos
+                        </h2>
+                        <p class="text-sm text-slate-500">Evaluación de 10 riesgos operativos y tecnológicos.</p>
+                    </div>
+
+                    <!-- Filtro Dinámico -->
+                    <div class="flex items-center space-x-2">
+                        <label class="text-sm font-semibold text-slate-700">Filtrar por Nivel:</label>
+                        <select id="risk-filter" onchange="filterRisks()" class="border rounded-lg px-3 py-1.5 text-sm bg-slate-50 focus:ring-2 focus:ring-blue-500">
+                            <option value="TODOS">Todos los Niveles</option>
+                            <option value="CRÍTICO">Crítico</option>
+                            <option value="ALTO">Alto</option>
+                            <option value="MEDIO">Medio</option>
+                            <option value="BAJO">Bajo</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Tarjetas KPI -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6 text-center">
+                    <div class="p-4 bg-red-100 border border-red-300 rounded-lg">
+                        <span class="text-2xl font-black text-red-700">2</span>
+                        <p class="text-xs font-bold text-red-800 uppercase">Riesgos Críticos</p>
+                    </div>
+                    <div class="p-4 bg-orange-100 border border-orange-300 rounded-lg">
+                        <span class="text-2xl font-black text-orange-700">4</span>
+                        <p class="text-xs font-bold text-orange-800 uppercase">Riesgos Altos</p>
+                    </div>
+                    <div class="p-4 bg-yellow-100 border border-yellow-300 rounded-lg">
+                        <span class="text-2xl font-black text-yellow-700">3</span>
+                        <p class="text-xs font-bold text-yellow-800 uppercase">Riesgos Medios</p>
+                    </div>
+                    <div class="p-4 bg-green-100 border border-green-300 rounded-lg">
+                        <span class="text-2xl font-black text-green-700">1</span>
+                        <p class="text-xs font-bold text-green-800 uppercase">Riesgos Bajos</p>
+                    </div>
+                </div>
+
+                <!-- Mapa de Calor y Gráfico Chart.js -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                    <div class="bg-slate-50 p-4 rounded-xl border">
+                        <h3 class="text-sm font-bold text-slate-700 mb-3 text-center">Mapa de Calor (Probabilidad vs Impacto)</h3>
+                        <div class="grid grid-cols-4 gap-1 text-xs text-center font-bold">
+                            <div class="p-2"></div>
+                            <div class="p-2 bg-slate-200">Imp. Bajo</div>
+                            <div class="p-2 bg-slate-200">Imp. Medio</div>
+                            <div class="p-2 bg-slate-200">Imp. Alto</div>
+
+                            <div class="p-2 bg-slate-200 flex items-center justify-center">Prob. Alta</div>
+                            <div class="p-3 bg-yellow-200 text-yellow-900 rounded">R2</div>
+                            <div class="p-3 bg-orange-300 text-orange-900 rounded">R1, R7</div>
+                            <div class="p-3 bg-red-500 text-white rounded">R4 (Crítico)</div>
+
+                            <div class="p-2 bg-slate-200 flex items-center justify-center">Prob. Media</div>
+                            <div class="p-3 bg-green-200 text-green-900 rounded">R9</div>
+                            <div class="p-3 bg-yellow-200 text-yellow-900 rounded">R5, R10</div>
+                            <div class="p-3 bg-orange-300 text-orange-900 rounded">R3, R8</div>
+
+                            <div class="p-2 bg-slate-200 flex items-center justify-center">Prob. Baja</div>
+                            <div class="p-3 bg-green-100 rounded">-</div>
+                            <div class="p-3 bg-green-100 rounded">-</div>
+                            <div class="p-3 bg-red-500 text-white rounded">R6 (Crítico)</div>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-50 p-4 rounded-xl border flex flex-col items-center justify-center">
+                        <h3 class="text-sm font-bold text-slate-700 mb-2">Distribución Visual de Riesgos</h3>
+                        <div class="w-60 h-60">
+                            <canvas id="riskChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tabla Dinámica de Riesgos -->
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse text-xs md:text-sm">
+                        <thead>
+                            <tr class="bg-blue-900 text-white">
+                                <th class="p-3">ID</th>
+                                <th class="p-3">Riesgo / Amenaza</th>
+                                <th class="p-3">Activo Afectado</th>
+                                <th class="p-3">Probabilidad</th>
+                                <th class="p-3">Impacto</th>
+                                <th class="p-3">Nivel de Riesgo</th>
+                            </tr>
+                        </thead>
+                        <tbody id="risk-table-body" class="divide-y divide-slate-200">
+                            <!-- Inyectado por JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+<!-- SECCIÓN 5: PLAN DE ACCIÓN -->
+        <section id="sec-plan" class="tab-content hidden">
+            <div class="bg-white p-6 rounded-xl shadow-md mb-6">
+                <h2 class="text-2xl font-bold text-blue-900 mb-4 flex items-center gap-2">
+                    <i class="fa-solid fa-list-check"></i> Plan de Acción & Mitigación
+                </h2>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse text-xs md:text-sm">
+                        <thead>
+                            <tr class="bg-slate-800 text-white">
+                                <th class="p-3">Riesgo</th>
+                                <th class="p-3">Control ISO 27001 Propuesto</th>
+                                <th class="p-3">Acción de Mitigación</th>
+                                <th class="p-3">Responsable</th>
+                                <th class="p-3">Prioridad</th>
+                            </tr>
+                        </thead>
+                        <tbody id="plan-table-body" class="divide-y divide-slate-200">
+                            <!-- Inyectado por JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-slate-900 text-slate-400 text-xs py-4 mt-auto text-center">
+        <p>© 2026 Cooperativa de Ahorro y Crédito Futuro Seguro - SGSI.</p>
+    </footer>
+<!-- JAVASCRIPT LÓGICA -->
+    <script>
+        // Array de los 10 riesgos identificados
+        const riesgosData = [
+            { id: "R1", nombre: "Ataques de Phishing masivos a empleados", activo: "Correo Corporativo", prob: "Alta", impacto: "Medio", nivel: "ALTO", color: "bg-orange-500 text-white" },
+            { id: "R2", nombre: "Infección por Malware / Ransomware", activo: "Estaciones de Trabajo", prob: "Alta", impacto: "Bajo", nivel: "MEDIO", color: "bg-yellow-500 text-slate-900" },
+            { id: "R3", nombre: "Acceso no autorizado por contraseñas débiles", activo: "Base de Datos de Clientes", prob: "Media", impacto: "Alto", nivel: "ALTO", color: "bg-orange-500 text-white" },
+            { id: "R4", nombre: "Falla de servidores principales", activo: "Core Bancario", prob: "Alta", impacto: "Alto", nivel: "CRÍTICO", color: "bg-red-600 text-white" },
+            { id: "R5", nombre: "Error humano / Eliminación de datos", activo: "Base de Datos de Clientes", prob: "Media", impacto: "Medio", nivel: "MEDIO", color: "bg-yellow-500 text-slate-900" },
+            { id: "R6", nombre: "Incendio o desastre físico en Data Center", activo: "Infraestructura de Servidores", prob: "Baja", impacto: "Alto", nivel: "CRÍTICO", color: "bg-red-600 text-white" },
+            { id: "R7", nombre: "Ataque de Denegación de Servicio (DDoS)", activo: "Sitio Web Institucional", prob: "Alta", impacto: "Medio", nivel: "ALTO", color: "bg-orange-500 text-white" },
+            { id: "R8", nombre: "Fuga de información confidencial", activo: "Información Financiera", prob: "Media", impacto: "Alto", nivel: "ALTO", color: "bg-orange-500 text-white" },
+            { id: "R9", nombre: "Corte del servicio de proveedor de Internet", activo: "Red Corporativa", prob: "Media", impacto: "Bajo", nivel: "BAJO", color: "bg-green-600 text-white" },
+            { id: "R10", nombre: "Falla en el sistema de respaldos", activo: "Sistema de Respaldos", prob: "Media", impacto: "Medio", nivel: "MEDIO", color: "bg-yellow-500 text-slate-900" }
+        ];
+
+        // Array del Plan de Acción
+        const planData = [
+            { riesgo: "R1. Phishing", control: "A.7.2 Concientización de seguridad", accion: "Capacitación continua en identificación de correos falsos.", resp: "RRHH & TI", prioridad: "Alta" },
+            { riesgo: "R2. Malware", control: "A.8.7 Protección contra malware", accion: "Antivirus EDR y actualización continua de sistemas.", resp: "Seguridad TI", prioridad: "Media" },
+            { riesgo: "R3. Accesos no autorizados", control: "A.9.4 Control de accesos", accion: "Implementar autenticación multifactor (MFA) obligatoria.", resp: "Departamento TI", prioridad: "Alta" },
+            { riesgo: "R4. Fallas de Servidores", control: "A.17.1 Continuidad de seguridad", accion: "Servidor alternativo de contingencia y réplica.", resp: "Infraestructura", prioridad: "Alta" },
+            { riesgo: "R5. Error humano", control: "A.8.18 Control de privilegios", accion: "Asignación de acceso basado en roles (RBAC).", resp: "Departamento TI", prioridad: "Media" },
+            { riesgo: "R6. Desastre en Data Center", control: "A.11.1 Áreas seguras / ISO 22301", accion: "Sistemas anti-incendios y DRP en sitio alterno.", resp: "Gerencia & TI", prioridad: "Alta" },
+            { riesgo: "R7. Ataque DDoS", control: "A.8.20 Seguridad de red", accion: "Implementar Firewall WAF con protección anti-DDoS.", resp: "Comunicaciones", prioridad: "Alta" },
+            { riesgo: "R8. Fuga de datos", control: "A.7.3 Desvinculación de personal", accion: "Revocación inmediata de accesos al retirar personal.", resp: "RRHH & TI", prioridad: "Media" },
+            { riesgo: "R9. Corte de ISP", control: "A.8.21 Enlaces de red", accion: "Contratación de enlace redundante con segundo ISP.", resp: "Redes", prioridad: "Baja" },
+            { riesgo: "R10. Fallas de Backup", control: "A.8.13 Copias de seguridad", accion: "Configurar copias de seguridad automáticas y pruebas.", resp: "Departamento TI", prioridad: "Alta" }
+        ];
+
+        // Función para renderizar la tabla de riesgos
+        function renderRiesgos(filter = "TODOS") {
+            const tbody = document.getElementById("risk-table-body");
+            tbody.innerHTML = "";
+            const filtered = filter === "TODOS" ? riesgosData : riesgosData.filter(r => r.nivel === filter);
+
+            filtered.forEach(r => {
+                const tr = document.createElement("tr");
+                tr.className = "hover:bg-slate-50 border-b";
+                tr.innerHTML = `
+                    <td class="p-3 font-bold">${r.id}</td>
+                    <td class="p-3 font-medium">${r.nombre}</td>
+                    <td class="p-3 text-slate-600">${r.activo}</td>
+                    <td class="p-3">${r.prob}</td>
+                    <td class="p-3">${r.impacto}</td>
+                    <td class="p-3"><span class="px-2 py-1 rounded-full text-xs font-bold ${r.color}">${r.nivel}</span></td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // Función para renderizar la tabla del plan de acción
+        function renderPlan() {
+            const tbody = document.getElementById("plan-table-body");
+            tbody.innerHTML = "";
+            planData.forEach(p => {
+                const prioClass = p.prioridad === "Alta" ? "text-red-600 font-bold" : (p.prioridad === "Media" ? "text-orange-600 font-bold" : "text-green-600");
+                const tr = document.createElement("tr");
+                tr.className = "hover:bg-slate-50 border-b";
+                tr.innerHTML = `
+                    <td class="p-3 font-bold text-blue-900">${p.riesgo}</td>
+                    <td class="p-3 font-medium text-slate-700">${p.control}</td>
+                    <td class="p-3 text-slate-600">${p.accion}</td>
+                    <td class="p-3 text-xs font-semibold bg-slate-100 rounded">${p.resp}</td>
+                    <td class="p-3 ${prioClass}">${p.prioridad}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // Filtrar tabla por nivel de riesgo
+        function filterRisks() {
+            renderRiesgos(document.getElementById("risk-filter").value);
+        }
+
+        // Cambiar entre pestañas
+        function switchTab(tabId) {
+            document.querySelectorAll(".tab-content").forEach(el => el.classList.add("hidden"));
+            document.getElementById("sec-" + tabId).classList.remove("hidden");
+            document.querySelectorAll("nav button").forEach(btn => btn.classList.remove("bg-blue-600", "font-bold"));
+            document.getElementById("tab-" + tabId).classList.add("bg-blue-600", "font-bold");
+        }
+
+        // Inicializar gráfico de dona Chart.js
+        function initChart() {
+            const ctx = document.getElementById('riskChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Crítico', 'Alto', 'Medio', 'Bajo'],
+                    datasets: [{
+                        data: [2, 4, 3, 1],
+                        backgroundColor: ['#dc2626', '#f97316', '#eab308', '#16a34a']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { position: 'bottom' } }
+                }
+            });
+        }
+
+        // Ejecutar funciones al cargar la página
+        window.onload = function() {
+            renderRiesgos();
+            renderPlan();
+            initChart();
+        };
+    </script>
+</body>
+</html>        
